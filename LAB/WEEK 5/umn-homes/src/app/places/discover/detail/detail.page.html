@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="userMenu"></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons>
+      <ion-back-button defaultHref="/places/tabs/discover"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ place.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- <h1>{{ place.title }}</h1> -->
+        <!-- <ion-card-subtitle>{{ place.price | currency }} / night</ion-card-subtitle> -->
+        <ion-img [src]="place.imageUrl"></ion-img>
+        <!-- <p>{{ place.description }}</p> -->
+        <ion-button 
+          expand="block" 
+          color="primary" 
+          (click)="onBookPlace()"
+        >
+          Book
+        </ion-button>
+        <ion-button 
+          fill="outline" 
+          expand="block" 
+          color="danger"
+          href="/places/tabs/discover"
+        >
+          Cancel
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let recipe of recipes">
+    <ion-item (click)="detailRecipe(recipe.id)">
+      <ion-avatar slot="start">
+        <ion-img [src]="recipe.imageUrl"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        {{recipe.title}} 
+        <ion-button 
+          (click)="removeRecipe(recipe.id)"
+          color="danger"
+          float-right
+        >
+          <ion-icon name="trash"></ion-icon> Delete
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

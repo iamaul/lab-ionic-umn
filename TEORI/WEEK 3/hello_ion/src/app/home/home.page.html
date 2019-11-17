@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ campus }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    Welcome to {{ campus }}.
+    <br>
+    Visit our website: {{ website }}
+    <br>
+    Prodi: <ion-label *ngFor="let p of prodi">
+      {{ p.nama_prodi }} ({{ p.kode_prodi }})
+    </ion-label>
+    <ion-button
+      color="primary"
+      expand="block"
+      (click)="singkatCampus()"
+    >
+      Click me!
+    </ion-button>
+    <ion-button
+      color="primary"
+      expand="block"
+      (click)="prodiOnClicked()"
+    >
+      All Prodi
+    </ion-button>
+    <div *ngIf="flag">
+      <ion-button 
+        color="primary" 
+        expand="block"
+        *ngFor="let p of prodi"
+        [routerLink]="['/prodi/detail/', p.kode_prodi]"
+      >
+        {{ p.nama_prodi }}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

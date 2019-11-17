@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Planner</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/css/ionic.bundle.css"/>
+  <script type="text/javascript" src="app.js"></script>
+  <style>
+    :root {
+      --ion-safe-area-top: 20px;
+      --ion-safe-area-bottom: 22px;
+    }
+  </style>
+</head>
+<body>
+  <ion-app>
+    <ion-header translucent>
+        <ion-toolbar color="primary">
+            <ion-title>Budget Planner</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    
+    <ion-content fullscreen>
+        <ion-card>
+            <ion-card-header>
+                <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+                <ion-card-title>Input Pengeluaran</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-alert-controller></ion-alert-controller>
+                <ion-list 
+                    lines="full" 
+                    class="ion-no-margin ion-no-padding"
+                >
+                    <form 
+                        id="outcome"
+                        onsubmit="processOutcome(event)"
+                    >
+                        <ion-item>
+                            <ion-label position="stacked">
+                                Nama Pengeluaran
+                            </ion-label>
+                            <ion-input type="text" ng-model="name" oninput="inputOutcomeName(event)"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="stacked">
+                                Jumlah Pengeluaran
+                            </ion-label>
+                            <ion-input type="number" ng-model="amount" oninput="inputOutcomeAmount(event)"></ion-input>
+                        </ion-item>
+                        <br />
+                        <ion-button 
+                            type="button"
+                            class="ion-no-margin"
+                            color="danger"
+                            onclick="clearOutcomeForm()"
+                        >
+                            <ion-icon name="close"></ion-icon> Hapus
+                        </ion-button>
+                        <ion-button 
+                            type="submit"
+                            class="ion-no-margin"
+                        >
+                            <ion-icon name="add"></ion-icon> Tambah
+                        </ion-button>
+                    </form>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </ion-content>
+  </ion-app>
+</body>
+</html>

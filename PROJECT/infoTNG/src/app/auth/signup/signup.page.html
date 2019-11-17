@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/auth"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create A New Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Username</ion-label>
+                <ion-input 
+                  inputmode="username"
+                  name="username"
+                  required
+                  type="username"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input 
+                  inputmode="email"
+                  name="email"
+                  required
+                  email
+                  type="email"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Phone Number</ion-label>
+                <ion-input 
+                  type="number"
+                  name="phone"
+                  required
+                  pattern="[0-9]{13}"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input 
+                  type="password"
+                  ngModel
+                  name="password"
+                  required
+                  minlength="6"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Confirm Password</ion-label>
+                <ion-input 
+                  type="password"
+                  ngModel
+                  name="confirm_password"
+                  required
+                  minlength="6"
+                >
+                </ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col size-sm="6" offset-sm="3">
+            <!-- <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner> -->
+            <ion-button type="submit" color="tertiary" expand="block">Sign Up</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+  
