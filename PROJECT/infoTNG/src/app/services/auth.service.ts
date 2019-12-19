@@ -4,7 +4,8 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Plugins } from '@capacitor/core';
-import { User } from './user.model';
+import { User } from '../models/user.model';
+import { AngularFirestore } from '@angular/fire/firestore'
 
 export interface AuthResponseData {
   kind: string;
@@ -45,7 +46,7 @@ export class AuthService implements OnDestroy {
     }));
   }
 
-  get userDisplayName() {
+  get userName() {
     return this.userBehave.asObservable().pipe(map(user => {
       if (user) {
         return user.displayName;
@@ -55,7 +56,20 @@ export class AuthService implements OnDestroy {
     }));
   }
 
-  constructor(private http: HttpClient) { }
+  get userMail() {
+    return this.userBehave.asObservable().pipe(map(user => {
+      if (user) {
+        return user.email;
+      } else {
+        return null;
+      }
+    }));
+  }
+
+  constructor(
+    private http: HttpClient,
+    private afstore: AngularFirestore
+  ) { }
 
   autoLogin() {
     return from(Plugins.Storage.get({ key: 'authData' })).pipe(map(data => {
@@ -98,7 +112,7 @@ export class AuthService implements OnDestroy {
   onUserSignUp(displayName: string, email: string, password: string) {
     return this.http.post<AuthResponseData>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
-        environment.firebaseAPIKey
+        environment.firebaseConfig.apiKey
       }`,
       { displayName, email, password, returnSecureToken: true }
     ).pipe(tap(this.setUserData.bind(this)));
@@ -107,7 +121,7 @@ export class AuthService implements OnDestroy {
   onUserLogin(email: string, password: string) {
     return this.http.post<AuthResponseData>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
-        environment.firebaseAPIKey
+        environment.firebaseConfig.apiKey
       }`,
       { email, password, returnSecureToken: true }
     ).pipe(tap(this.setUserData.bind(this)));
@@ -145,6 +159,12 @@ export class AuthService implements OnDestroy {
       userData.idToken,
       expirationTime
     );
+    this.afstore.doc(`users/${userData.localId}`).set({
+      idToken: userData.idToken,
+      username: userData.displayName,
+      email: userData.email,
+      photoUrl: 'gs://info-tng.appspot.com/users/profile/avatar/default_avatar.PNG'
+    });
     this.userBehave.next(user);
     this.autoLogout(user.tokenDuration);
     this.storeAuthData(

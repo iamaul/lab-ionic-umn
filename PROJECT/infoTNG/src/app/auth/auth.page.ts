@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService, AuthResponseData } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -27,8 +27,7 @@ export class AuthPage implements OnInit {
 
   userAuthenticate(displayName: string, email: string, password: string) {
     this.isLoading = true;
-    this.loadingCtrl
-      .create({ keyboardClose: true, message: 'Verifying ...' })
+    this.loadingCtrl.create({ keyboardClose: true, message: 'Verifying ...' })
       .then(loadingEl => {
         loadingEl.present();
         let authObs: Observable<AuthResponseData>;

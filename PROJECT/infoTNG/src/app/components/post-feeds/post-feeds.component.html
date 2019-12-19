@@ -1,0 +1,34 @@
+<ion-card button="true" routerLink="/menu/tabs/feeds/detail/{{ post.id }}">
+  <!-- <ion-img [src]="post.enclosure" *ngIf="post.enclosure else placeholder"></ion-img> -->
+  <ion-card-header>
+    <ion-card-title>{{ post.title }}</ion-card-title>
+    <ion-card-subtitle>{{ post.userId }} - {{ post.createdAt.seconds*1000 | date: 'MMM d, y / hh:mm aa' }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    {{ post.caption | truncate: 150 }}
+    <section>
+      <ion-chip *ngFor="let tag of post.tags; let i = index" (click)="filterByTag($event, tag)">
+        <ion-label>{{ tag.name }}</ion-label>
+      </ion-chip>
+    </section>
+  </ion-card-content>
+  <ion-row class="ion-justify-content-left">
+    <ion-col size="8" class="ion-text-left">
+      <ion-button fill="clear" size="small" color="primary" (click)="like($event, post)" *ngIf="post.id">
+        <ion-icon name="heart" slot="start"></ion-icon>
+          Like
+      </ion-button>
+      <ion-button fill="clear" size="small" color="primary" (click)="comment($event, post)" *ngIf="post.id">
+        <ion-icon name="create" slot="start"></ion-icon>
+          Comment
+      </ion-button>
+    </ion-col>
+    <!-- <ion-col size="4" class="ion-text-right">
+      <ion-button fill="clear" size="small" color="primary" (click)="presentActionSheet($event, post)">
+        <ion-button fill="clear" size="small" color="primary">
+          <ion-icon name="more" slot="start"></ion-icon>
+        </ion-button>
+      </ion-button>
+    </ion-col> -->
+  </ion-row>
+</ion-card>

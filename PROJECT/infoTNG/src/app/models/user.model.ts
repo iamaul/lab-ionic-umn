@@ -1,5 +1,3 @@
-import { getLocaleTimeFormat } from '@angular/common';
-
 export class User {
     constructor(
         public id: string,

@@ -1,14 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons (click)="onUserClickEditProfile()" slot="start">
+      <ion-icon name="create" color="tertiary"></ion-icon>
+    </ion-buttons> -->
+    <ion-title color="tertiary">Profile</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onUserClickLogout()">
+        <ion-icon name="log-out" color="tertiary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
 <ion-content class="ion-padding">
   <div class="header">
-    <h4>Agung Maulana</h4>
-    <h5>Seorang Mahasiswa</h5>
+    <h4>{{ username }}</h4>
+    <h5>
+      {{ usermail }}<br><br>
+      <ion-button size="small" color="light" (click)="onUserEditProfile()">Edit Profile</ion-button>
+    </h5>
   </div>
 
   <div class="flex">
     <div class="blueBorder">
       <div class="whiteBorder">
         <div class="photoProfile">
-          <img src="https://cdn0-production-images-kly.akamaized.net/aOT8HZm6653fYXgSXesxjTRB79M=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2381549/original/047438300_1539318646-Dono1.jpg">
+          <img [src]="avatar">
         </div>
       </div>
     </div>

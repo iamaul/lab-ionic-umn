@@ -3,5 +3,8 @@
   "appName": "Week03_00000018159",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://localhost:8100"
+  }
 }

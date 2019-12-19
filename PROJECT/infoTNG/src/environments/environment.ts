@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  firebaseAPIKey: 'AIzaSyAXfDol433eJ3peoYDkMiYpgY5iLtY-XVE'
+  firebaseConfig: {
+    apiKey: 'AIzaSyAXfDol433eJ3peoYDkMiYpgY5iLtY-XVE',
+    authDomain: 'info-tng.firebaseapp.com',
+    databaseURL: 'https://info-tng.firebaseio.com',
+    projectId: 'info-tng',
+    storageBucket: 'info-tng.appspot.com',
+    messagingSenderId: '646997269065',
+    appId: '1:646997269065:web:fb2c164b8546adc369fd98',
+    measurementId: 'G-MVPGKMKCXQ'
+  }
 };
 
 /*

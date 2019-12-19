@@ -1,59 +1,65 @@
-<ion-content class="ion-padding">
-  <ion-card>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-avatar>
-      <ion-label>Alun-alun Tangerang</ion-label>
-    </ion-item>
-    <img src="https://cdn2.tstatic.net/jakarta/foto/bank/images/jalan-windu-raya_20180817_103454.jpg" />
-  
-    <ion-card-content>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="heart"></ion-icon>
-            12 likes
-          </button>
-          &nbsp;
-          <button ion-button icon-start clear small>
-            <ion-icon name="text"></ion-icon>
-            4 comments
-          </button>
-        </ion-col>
-      </ion-row>
-      <h2>Hendro Kartiko</h2>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
-    </ion-card-content>
-  </ion-card>
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="tertiary">Feeds</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-card>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-avatar>
-      <ion-label>Alun-alun Tangerang</ion-label>
-    </ion-item>
-    <img src="https://cdn2.tstatic.net/jakarta/foto/bank/images/jalan-windu-raya_20180817_103454.jpg" />
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-toolbar *ngIf="tags let tag">
+        <ion-chip (click)="resetFilters()">
+          <ion-label>{{ tag.name }}</ion-label>
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-chip>
+      </ion-toolbar>
+    </ion-row>
+    <ion-row *ngIf="posts$ | async; let posts;else loading">
+      <ion-col size="12" size-md="6" *ngFor="let post of posts$ | async">
+        <app-post-feeds 
+          [post]="post" 
+          (action)="handleOnPostAction($event)" 
+          (filter)="filterByTag($event)"
+        >
+        </app-post-feeds>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="ion-text-center" *ngIf="(posts$ | async)?.length == 0">
+    <img src="/assets/images/data_404_not_found.png"/>
+    <ion-col>
+      <h1>Oops! No data found.</h1>
+    </ion-col>
+  </div>
+
+  <!-- Skeleton Loading Screen -->
+  <ng-template #loading>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let number of [0,1,2,3,4]">
+        <ion-list>
+          <ion-list-header>
+            <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+          </ion-list-header>
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ng-template>
   
-    <ion-card-content>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="heart"></ion-icon>
-            12 likes
-          </button>
-          &nbsp;
-          <button ion-button icon-start clear small>
-            <ion-icon name="text"></ion-icon>
-            4 comments
-          </button>
-        </ion-col>
-      </ion-row>
-      <h2>Hendro Kartiko</h2>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
-    </ion-card-content>
-  </ion-card>
 </ion-content>

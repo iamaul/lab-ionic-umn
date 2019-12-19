@@ -1,9 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/tabs/feeds"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="post else loading">
+  <div class="about-header">
+    <ion-img src="https://ionicframework.com/docs/demos/api/card/madison.jpg"></ion-img>
+  </div>
+  <div class="about-info">
+    <h4 class="ion-padding-start">{{ post.title }}</h4>
 
+    <ion-list>
+      <ion-item>
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label>Created at {{ post.createdAt.seconds*1000 | date: 'MMM d, y / hh:mm aa' }}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="post.updatedAt">
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label>Updated at {{ post.updatedAt.seconds*1000 | date: 'MMM d, y / hh:mm aa' }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <p class="ion-padding-start ion-padding-end ion-text-justify">{{ post.caption }}</p>
+  </div>
 </ion-content>
+
+<ng-template #loading>
+  <ion-content>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-content>
+</ng-template>

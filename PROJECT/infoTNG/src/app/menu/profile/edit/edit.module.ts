@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FeedsPage } from './feeds.page';
-import { PostFeedsModule } from '../../components/post-feeds/post-feeds.module';
+import { EditPage } from './edit.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FeedsPage
+    component: EditPage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    PostFeedsModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [FeedsPage]
+  declarations: [EditPage]
 })
-export class FeedsPageModule {}
+export class EditPageModule {}

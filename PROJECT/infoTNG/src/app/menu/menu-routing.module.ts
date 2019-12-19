@@ -15,7 +15,11 @@ const routes: Routes = [
                         loadChildren: './feeds/feeds.module#FeedsPageModule'
                     },
                     {
-                        path: ':postId',
+                        path: 'create',
+                        loadChildren: './feeds/create/create.module#CreatePageModule'
+                    },
+                    {
+                        path: 'detail/:id',
                         loadChildren: './feeds/detail/detail.module#DetailPageModule'
                     }
                 ]
@@ -26,6 +30,10 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: './profile/profile.module#ProfilePageModule'
+                    },
+                    {
+                        path: 'edit',
+                        loadChildren: './profile/edit/edit.module#EditPageModule'
                     }
                 ]
             },
@@ -41,6 +49,7 @@ const routes: Routes = [
         redirectTo: '/menu/tabs/feeds',
         pathMatch: 'full'
     },
+
 ];
 
 @NgModule({

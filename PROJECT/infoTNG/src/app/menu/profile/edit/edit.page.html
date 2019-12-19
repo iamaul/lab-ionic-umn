@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onUserEditProfile()" [disabled]="!form.valid">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="username"
+            >
+            </ion-input>
+            <ion-label 
+              *ngIf="!form.get('username').valid && form.get('username').touched"
+              color="danger"
+              position="stacked"
+            >
+              Username should be at least 4 characters long.
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input
+              type="email"
+              autocomplete
+              autocorrect
+              formControlName="email"
+            >
+            </ion-input>
+            <ion-label 
+              *ngIf="!form.get('email').valid && form.get('email').touched"
+              color="danger"
+              position="stacked"
+            >
+              Should be a valid email address.
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input
+              type="password"
+              formControlName="password"
+            >
+            </ion-input>
+            <ion-label 
+              *ngIf="!form.get('password').valid && form.get('password').touched"
+              color="danger"
+              position="stacked"
+            >
+              Should at least be 6 characters long.
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
